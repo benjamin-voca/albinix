@@ -10,7 +10,7 @@
   # Bootloader for BIOS/UEFI
   boot.loader.grub = {
     enable = true;
-    devices = [ "/dev/sda" ]; # adjust if your disk is different
+    devices = "/dev/sda"; # adjust if your disk is different
     useOSProber = false;
     efiSupport = true;
     efiInstallAsRemovable = true;
