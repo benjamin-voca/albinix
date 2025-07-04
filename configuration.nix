@@ -14,9 +14,8 @@
     useOSProber = false;
     efiSupport = true;
     # efiInstallAsRemovable = true;
-    canTouchEfiVariables = true;
   };
-
+  boot.loader.efi.canTouchEfiVariables = true;
   # Enable SSH
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
