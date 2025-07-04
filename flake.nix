@@ -8,19 +8,30 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, disko, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
+    let
+      systems = flake-utils.lib.defaultSystems;
+    in
+    flake-utils.lib.eachSystem systems (system:
       let
         pkgs = import nixpkgs {
           inherit system;
         };
       in {
-        nixosConfigurations.ci-host = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            disko.nixosModules.disko
-            ./configuration.nix
-            ./disko.nix
-          ];
-        };
-      });
+        packages = {}; # optional if you want to define packages per system
+      }
+    ) // {
+      nixosConfigurations.ci-host = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          disko.nixosModules.disko
+          ./configuration.nix
+          ./disko.nix
+        ];
+      };
+
+      templates.default = {
+        path = ./.;
+        description = "NixOS template with Disko, Docker, Jenkins, etc.";
+      };
+    };
 }
