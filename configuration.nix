@@ -13,7 +13,8 @@
     devices = [ "/dev/sda" ]; # not "/dev/sda1"
     useOSProber = false;
     efiSupport = true;
-    efiInstallAsRemovable = true;
+    # efiInstallAsRemovable = true;
+    canTouchEfiVariables = true;
   };
 
   # Enable SSH
