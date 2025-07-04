@@ -2,7 +2,7 @@
   description = "NixOS with Disko, Docker, Jenkins, etc.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     disko.url = "github:nix-community/disko";
     flake-utils.url = "github:numtide/flake-utils";
   };
