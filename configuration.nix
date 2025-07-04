@@ -7,13 +7,22 @@
 
   system.stateVersion = "24.05";
 
+  # Bootloader for BIOS/UEFI
+  boot.loader.grub = {
+    enable = true;
+    devices = [ "/dev/sda" ]; # adjust if your disk is different
+    useOSProber = false;
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+  };
+
   # Enable SSH
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
   services.openssh.settings.PermitRootLogin = "no";
 
   # Users
-  users.users={
+  users.users = {
     benjamin = {
       isNormalUser = true;
       extraGroups = [ "wheel" "docker" "podman" ];
@@ -58,29 +67,30 @@
   };
 
   # Docker
-  virtualisation.docker.enable = true;
-
+  virtualisation = {
+    docker.enable = true;
+    vmware.guest.enable = true;
   # Podman
-  virtualisation.podman.enable = true;
+    podman.enable = true;
+    podman.defaultNetwork.settings.dns_enabled = true;
+  };
 
-  # Firewall - Open necessary ports
+  # VMware guest tools
+  # services.vmwareGuest.enable = true;
+
+  # Firewall
   networking.firewall.allowedTCPPorts = [ 
     22    # SSH
     8080  # Jenkins
   ];
 
-  # Allow podman to expose ports to host
-  virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
-
-  # Optional: Enable fish shell globally
+  # Fish shell
   programs.fish.enable = true;
 
-  # Optional: Set hostname
+  # Hostname and networking
   networking.hostName = "ci-host";
-
-  # Optional: Enable networking
   networking.networkmanager.enable = true;
 
-  # Optional: Enable graphical environment
+  # Optional: enable X11 if GUI is ever needed
   # services.xserver.enable = true;
 }
