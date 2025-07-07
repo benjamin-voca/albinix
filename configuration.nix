@@ -4,6 +4,7 @@
   imports = [
     # ./disko.nix
     ./hardware-configuration.nix
+    ./packages.nix
   ];
 
   system.stateVersion = "25.05";
