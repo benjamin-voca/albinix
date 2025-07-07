@@ -2,30 +2,31 @@
 
 {
   imports = [
-    ./disko.nix
+    # ./disko.nix
   ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 
   # Bootloader for BIOS/UEFI
-  boot.loader.grub = {
-    enable = true;
-    devices = [ "/dev/sda" ]; # not "/dev/sda1"
-    useOSProber = false;
-    efiSupport = true;
-    # efiInstallAsRemovable = true;
-  };
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  # Enable SSH
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
   services.openssh.settings.PermitRootLogin = "no";
 
+  networking.networkmanager.enable = true;
+
+  # Set your time zone.
+  time.timeZone = "Europe/Sarajevo";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+  nixpkgs.config.allowUnfree = true;
   # Users
   users.users = {
     benjamin = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "docker" "podman" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" "podman" ];
       shell = pkgs.fish;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILaEuHKb7PS/LyaBxvNzIcVzMOW0aDVHFnauM9pSjxm8 benjamin@Benjamins-MacBook-Pro.local"
@@ -33,16 +34,16 @@
     };
     klajdi = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "docker" "podman" ];
-      shell = pkgs.fish;
+      extraGroups = [ "networkmanager" "wheel" "docker" "podman" ];
+      shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDOgJOT75+//lRa1pA9Y83Kj94+QgG5lJOdjrCW330km klajdi.gashi01@gmail.com"
       ];
     };
     gjoni = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "docker" "podman" ];
-      shell = pkgs.fish;
+      extraGroups = [ "networkmanager" "wheel" "docker" "podman" ];
+      shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFikrtxTY3L49JN5OmWCFaNRAFBb6InjxPiXmc6iSCa2 gjonhajdari@chon-mekbuk.local"
       ];
