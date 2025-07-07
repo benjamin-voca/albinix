@@ -15,8 +15,6 @@
   services.openssh.settings.PasswordAuthentication = false;
   services.openssh.settings.PermitRootLogin = "no";
 
-  networking.networkmanager.enable = true;
-
   # Set your time zone.
   time.timeZone = "Europe/Sarajevo";
 
