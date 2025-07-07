@@ -16,9 +16,9 @@
         ci-host = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            disko.nixosModules.disko
+            # disko.nixosModules.disko
             ./configuration.nix
-            ./disko.nix
+            # ./disko.nix
           ];
         };
       };
