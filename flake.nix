@@ -20,12 +20,6 @@
             ./configuration.nix
             ./disko.nix
           ];
-          specialArgs = {
-            pkgs = pkgs;
-            lib = nixpkgs.lib;
-            self = self;
-            system = system;
-          };
         };
       };
 
