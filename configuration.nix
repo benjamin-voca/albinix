@@ -59,6 +59,8 @@
     jujutsu
     yazi
     neovim
+    helix
+    zoxide
   ];
 
   # Jenkins
