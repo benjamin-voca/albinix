@@ -82,12 +82,11 @@
   # VMware guest tools
   # services.vmwareGuest.enable = true;
 
-  # Firewall
   networking.firewall = {
     enable = true;
+    allowedTCPPorts = [ 22 ];
     allowedTCPPortRanges = [
       { from = 8000; to = 8999; }
-      22
     ];
     allowedUDPPortRanges = [
       { from = 8000; to = 8999; }
