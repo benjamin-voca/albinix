@@ -83,10 +83,16 @@
   # services.vmwareGuest.enable = true;
 
   # Firewall
-  networking.firewall.allowedTCPPorts = [ 
-    22    # SSH
-    8080  # Jenkins
-  ];
+  networking.firewall = {
+    enable = true;
+    allowedTCPPortRanges = [
+      { from = 8000; to = 8999; }
+      22
+    ];
+    allowedUDPPortRanges = [
+      { from = 8000; to = 8999; }
+    ];
+  };
 
   # Fish shell
   programs.fish.enable = true;
