@@ -62,6 +62,14 @@
     neovim
     helix
     zoxide
+    qemu
+    virtiofsd
+    podman-compose
+    pnpm
+    nodejs
+    phpPackages.composer
+    php
+    lsof
   ];
 
   # Jenkins
