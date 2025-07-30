@@ -70,6 +70,7 @@
     phpPackages.composer
     php
     lsof
+    python314
   ];
 
   # Jenkins
