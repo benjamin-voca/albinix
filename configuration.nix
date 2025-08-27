@@ -54,18 +54,19 @@
   programs = {
     zsh = {
       enable = true;
+
       ohMyZsh = {
         enable = true;
         theme = "alanpeabody";
         plugins = [
           "sudo"
           "terraform"
-          "systemadmin"
           "vi-mode"
-          "carapace"
-          "zsh-syntax-highlighting"
         ];
       };
+
+      syntaxHighlighting.enable = true;
+      autosuggestions.enable = true; # optional, nice to have
     };
   };
   # Packages
