@@ -3,7 +3,7 @@
 {
   imports = [
     # ./disko.nix
-    ./hardware-configuration.nix
+    /etc/nixos/hardware-configuration.nix
     ./packages.nix
   ];
 
@@ -38,7 +38,7 @@
       extraGroups = [ "networkmanager" "wheel" "docker" "podman" ];
       shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDOgJOT75+//lRa1pA9Y83Kj94+QgG5lJOdjrCW330km klajdi.gashi01@gmail.com"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQisXyPG28p3bjlL6slxTsZWdQRDBcIq0eKf388kjJk klajdimac@gmail.com"
       ];
     };
     gjoni = {
@@ -51,6 +51,23 @@
     };
   };
 
+  programs = {
+    zsh = {
+      enable = true;
+      ohMyZsh = {
+        enable = true;
+        theme = "alanpeabody";
+        plugins = [
+          "sudo"
+          "terraform"
+          "systemadmin"
+          "vi-mode"
+          "carapace"
+          "zsh-syntax-highlighting"
+        ];
+      };
+    };
+  };
   # Packages
   environment.systemPackages = with pkgs; [
     git
@@ -91,14 +108,30 @@
   # VMware guest tools
   # services.vmwareGuest.enable = true;
 
+
+  networking.useDHCP = false;
+  networking.useNetworkd = false;
+
+  networking.interfaces.ens34 = {
+    ipv4.addresses = [{
+      address = "185.177.31.11";
+      prefixLength = 25;
+    }];
+  };
+
+  networking.defaultGateway = "185.177.31.1";
+  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ]; # Optional: set DNS servers
+
+
+
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 ];
+    allowedTCPPorts = [ 22 80 ];
     allowedTCPPortRanges = [
-      { from = 8000; to = 8999; }
+      { from = 5100; to = 8999; }
     ];
     allowedUDPPortRanges = [
-      { from = 8000; to = 8999; }
+      { from = 5100; to = 8999; }
     ];
   };
 
