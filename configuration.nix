@@ -36,7 +36,7 @@
     klajdi = {
       isNormalUser = true;
       extraGroups = [ "networkmanager" "wheel" "docker" "podman" ];
-      shell = pkgs.zsh;
+      shell = pkgs.fish;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQisXyPG28p3bjlL6slxTsZWdQRDBcIq0eKf388kjJk klajdimac@gmail.com"
       ];
@@ -44,7 +44,7 @@
     gjoni = {
       isNormalUser = true;
       extraGroups = [ "networkmanager" "wheel" "docker" "podman" ];
-      shell = pkgs.zsh;
+      shell = pkgs.fish;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFikrtxTY3L49JN5OmWCFaNRAFBb6InjxPiXmc6iSCa2 gjonhajdari@chon-mekbuk.local"
       ];
