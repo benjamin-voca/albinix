@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  hostConfig = builtins.trim (builtins.readFile "/etc/hostname");
+  hostConfig = lib.removeSuffix "\n" (builtins.readFile "/etc/hostname");
 in
 {
   imports = [
