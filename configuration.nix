@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-    hostConfig = builtins.readFile "/etc/hostname"; # Or hardcode: "ci-host"
+  hostConfig = builtins.trim (builtins.readFile "/etc/hostname");
 in
 {
   imports = [
