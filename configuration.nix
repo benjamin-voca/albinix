@@ -1,10 +1,14 @@
 { config, pkgs, ... }:
 
+let
+    hostConfig = builtins.readFile "/etc/hostname"; # Or hardcode: "ci-host"
+in
 {
   imports = [
     # ./disko.nix
     /etc/nixos/hardware-configuration.nix
     ./packages.nix
+    ./hosts/${hostConfig}.nix
   ];
 
   system.stateVersion = "25.05";
@@ -50,25 +54,7 @@
       ];
     };
   };
-
-  programs = {
-    zsh = {
-      enable = true;
-
-      ohMyZsh = {
-        enable = true;
-        theme = "alanpeabody";
-        plugins = [
-          "sudo"
-          "terraform"
-          "vi-mode"
-        ];
-      };
-
-      syntaxHighlighting.enable = true;
-      autosuggestions.enable = true; # optional, nice to have
-    };
-  };
+  
   # Packages
   environment.systemPackages = with pkgs; [
     git
@@ -101,46 +87,31 @@
   virtualisation = {
     docker.enable = true;
     vmware.guest.enable = true;
-  # Podman
-    podman.enable = true;
-    podman.defaultNetwork.settings.dns_enabled = true;
   };
 
   # VMware guest tools
-  # services.vmwareGuest.enable = true;
+  services.vmwareGuest.enable = true;
 
 
   networking.useDHCP = false;
   networking.useNetworkd = false;
 
-  networking.interfaces.ens34 = {
-    ipv4.addresses = [{
-      address = "185.177.31.11";
-      prefixLength = 25;
-    }];
-  };
-
-  networking.defaultGateway = "185.177.31.1";
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ]; # Optional: set DNS servers
-
-
 
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 80 ];
-    allowedTCPPortRanges = [
-      { from = 5100; to = 8999; }
-    ];
-    allowedUDPPortRanges = [
-      { from = 5100; to = 8999; }
-    ];
+    # allowedTCPPortRanges = [
+    #   { from = 5100; to = 8999; }
+    # ];
+    # allowedUDPPortRanges = [
+    #   { from = 5100; to = 8999; }
+    # ];
   };
 
   # Fish shell
   programs.fish.enable = true;
 
   # Hostname and networking
-  networking.hostName = "ci-host";
   networking.networkmanager.enable = true;
 
   # Optional: enable X11 if GUI is ever needed
