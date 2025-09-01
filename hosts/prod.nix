@@ -8,6 +8,6 @@
     prefixLength = 25;
   }];
 
-  networking.defaultGateway = "185.177.31.12";
+  networking.defaultGateway = "185.177.31.1";
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 }
