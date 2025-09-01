@@ -89,10 +89,6 @@ in
     vmware.guest.enable = true;
   };
 
-  # VMware guest tools
-  services.vmwareGuest.enable = true;
-
-
   networking.useDHCP = false;
   networking.useNetworkd = false;
 
