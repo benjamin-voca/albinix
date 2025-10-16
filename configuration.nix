@@ -95,7 +95,7 @@ in
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 80 ];
+    allowedTCPPorts = [ 22 80 27017 ];
     # allowedTCPPortRanges = [
     #   { from = 5100; to = 8999; }
     # ];
