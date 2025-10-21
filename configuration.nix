@@ -75,6 +75,7 @@ in
     php
     lsof
     python314
+    kubernetes-helm
   ];
 
   # Jenkins
