@@ -75,6 +75,7 @@ in
     php
     lsof
     python314
+    kubectl
     kubernetes-helm
   ];
 
@@ -103,6 +104,13 @@ in
     # allowedUDPPortRanges = [
     #   { from = 5100; to = 8999; }
     # ];
+  };
+  services.kubernetes = {
+    roles = [ "master" "node" ]; # all-in-one node
+    masterAddress = "127.0.0.1";
+    apiserverAddress = "0.0.0.0";
+    easyCerts = true; # auto-generate certs
+    kubelet.extraOpts = "--fail-swap-on=false";
   };
 
   # Fish shell
