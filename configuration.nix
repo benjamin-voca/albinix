@@ -76,6 +76,7 @@ in
     lsof
     python314
     kubectl
+    lazygit
     kubernetes-helm
   ];
 
