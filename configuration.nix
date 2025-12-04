@@ -13,6 +13,9 @@ in
 
   system.stateVersion = "25.05";
 
+  # Enable Flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Bootloader for BIOS/UEFI
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
